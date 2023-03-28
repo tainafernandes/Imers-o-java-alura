@@ -33,5 +33,25 @@ public class Main {
             System.out.println();
         }
 
+        //conexão http
+        String url2 = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/MostPopularMovies.json";
+        URI address2 = URI.create(url2);
+        var client2 = HttpClient.newHttpClient();
+        var request2 = HttpRequest.newBuilder(address2).GET().build(); //Faço o get
+        HttpResponse<String> response2 = client.send(request, HttpResponse.BodyHandlers.ofString());
+        String body2 = response.body();
+
+        //pegar infos (título, poster, classificação)
+        var parser1 = new JsonParser();
+        List<Map<String, String>> listMovies2 = parser.parse(body);
+
+        //Exibir e manipular os dados
+        for(Map<String, String> movie : listMovies){
+            System.out.println(movie.get("title"));
+            System.out.println(movie.get("image"));
+            System.out.println(movie.get("imDbRating"));
+            System.out.println();
+        }
+
     }
 }
